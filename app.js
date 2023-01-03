@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 dotenv.config({ path: "./.env" });
 const app = express();
 const cookieParser = require("cookie-parser");
-app.use(cors({ credentials: true, origin: 'https://63b3e4f25f6ddd339a05d171--tubular-dasik-2bab4d.netlify.app/' }));
+app.use(cors({ credentials: true, origin: 'https://63b3e4f25f6ddd339a05d171--tubular-dasik-2bab4d.netlify.app' }));
 app.use(cookieParser());
 app.use(express.json());
 app.use(require("./Controller/signup"));
