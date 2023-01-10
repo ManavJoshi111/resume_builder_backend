@@ -17,8 +17,8 @@ login.post("/login", async (req, res) => {
       const isMatch = await bcrypt.compare(password, userLogin.password);
       const Token = await userLogin.generateAuthToken();
       console.log("Token in login.js is ", Token);
-      res.cookie("jwToken", Token);
-
+      // store the cookie into users browser and set samesite attrubute to none
+      res.cookie("jwToken", Token, { sameSite: 'none' });
       if (!isMatch) {
         return res
           .status(400)
