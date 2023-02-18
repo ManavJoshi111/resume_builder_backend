@@ -6,18 +6,29 @@ const mongoose = require("mongoose");
 dotenv.config({ path: "./.env" });
 const app = express();
 const cookieParser = require("cookie-parser");
-app.use(cors({ credentials: true, origin: 'https://resume-builder-frontend.onrender.com' }));
 app.use(cookieParser());
 app.use(express.json());
 app.use(require("./Controller/signup"));
 app.use(require("./Controller/login"));
 app.use(require("./Controller/logout"));
 app.use(express.static('./Public'));
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+const allowedOrigin = 'https://resume-builder-frontend.onrender.com';
+const allowedHeaders = ['Content-Type', 'Authorization'];
+const allowedMethods = ['GET', 'POST', 'PUT', 'DELETE'];
+const options = {
+  origin: allowedOrigin,
+  methods: allowedMethods,
+  allowedHeaders: allowedHeaders,
+  credentials: true
+};
+app.use(cors(options));
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', options.origin);
+  res.header('Access-Control-Allow-Headers', options.allowedHeaders);
+  res.header('Access-Control-Allow-Methods', options.methods);
+  res.header('Access-Control-Allow-Credentials', true);
   next();
-})
+});
 // Connection To Mongodb Using Mongoose
 // mongoose
 //   .connect("mongodb://localhost:27017/resume_builder", {
