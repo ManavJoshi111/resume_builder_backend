@@ -13,6 +13,11 @@ app.use(require("./Controller/signup"));
 app.use(require("./Controller/login"));
 app.use(require("./Controller/logout"));
 app.use(express.static('./Public'));
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+})
 // Connection To Mongodb Using Mongoose
 // mongoose
 //   .connect("mongodb://localhost:27017/resume_builder", {
