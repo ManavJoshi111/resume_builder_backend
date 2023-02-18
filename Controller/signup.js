@@ -25,12 +25,12 @@ router.post("/signup", async (req, res) => {
         user
           .save()
           .then(() => {
-            return res
+            res
               .status(201)
               .json({ message: "Account created successfully" });
           })
           .catch((err) => {
-            return res.status(500).json({ error: err });
+            res.status(500).json({ error: err });
           });
       }
     })
