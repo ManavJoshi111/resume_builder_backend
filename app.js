@@ -12,13 +12,9 @@ app.use(require("./Controller/signup"));
 app.use(require("./Controller/login"));
 app.use(require("./Controller/logout"));
 app.use(express.static('./Public'));
-const allowedOrigin = 'https://resume-builder-frontend.onrender.com';
-const allowedHeaders = ['Content-Type', 'Authorization'];
-const allowedMethods = ['GET', 'POST', 'PUT', 'DELETE'];
 const options = {
-  origin: allowedOrigin,
-  methods: allowedMethods,
-  allowedHeaders: allowedHeaders,
+  origin: '*',
+  optionSuccessStatus: 200,
   credentials: true
 };
 app.use(cors(options));
