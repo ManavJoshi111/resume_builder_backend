@@ -5,6 +5,10 @@ const login = express();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 login.post("/login", async (req, res) => {
+  res.header("Access-Control-Allow-Origin", req.headers.origin);
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.header('Access-Control-Allow-Credentials', 'true');
   try {
     console.log("In login : ", req.headers.origin);
     const { username, password } = req.body;
