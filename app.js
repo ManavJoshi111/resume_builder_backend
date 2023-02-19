@@ -18,13 +18,13 @@ const options = {
   credentials: true
 };
 app.use(cors(options));
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', options.origin);
-  res.header('Access-Control-Allow-Headers', options.allowedHeaders);
-  res.header('Access-Control-Allow-Methods', options.methods);
-  res.header('Access-Control-Allow-Credentials', true);
-  next();
-});
+// app.use((req, res, next) => {
+//   res.header('Access-Control-Allow-Origin', options.origin);
+//   res.header('Access-Control-Allow-Headers', options.allowedHeaders);
+//   res.header('Access-Control-Allow-Methods', options.methods);
+//   res.header('Access-Control-Allow-Credentials', true);
+//   next();
+// });
 // Connection To Mongodb Using Mongoose
 // mongoose
 //   .connect("mongodb://localhost:27017/resume_builder", {
@@ -54,5 +54,6 @@ if (process.env.NODE_ENV === "production") {
 
 // Listening to port 3001
 app.listen(process.env.PORT || 8000, () => {
+  console.log("dljf : ", process.env.PORT);
   console.log("Server is running on port 8000");
 });
