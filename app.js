@@ -17,19 +17,7 @@ const options = {
   optionSuccessStatus: 200,
   credentials: true
 };
-app.use(cors(options));
-// app.use((req, res, next) => {
-//   res.header('Access-Control-Allow-Origin', options.origin);
-//   res.header('Access-Control-Allow-Headers', options.allowedHeaders);
-//   res.header('Access-Control-Allow-Methods', options.methods);
-//   res.header('Access-Control-Allow-Credentials', true);
-//   next();
-// });
-// Connection To Mongodb Using Mongoose
-// mongoose
-//   .connect("mongodb://localhost:27017/resume_builder", {
-//     useNewUrlParser: true,
-//   })
+app.use(cors());
 mongoose.connect("mongodb+srv://manavjoshi:3RvcXXPw8WTFvAxu@cluster0.w5kq0.mongodb.net/?retryWrites=true&w=majority", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
