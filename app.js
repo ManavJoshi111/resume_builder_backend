@@ -6,7 +6,10 @@ const mongoose = require("mongoose");
 dotenv.config({ path: "./.env" });
 const app = express();
 const cookieParser = require("cookie-parser");
-app.use(cors());
+app.use(cors({
+  origin: "https://resume-builder-frontend.onrender.com",
+  credentials: true,
+}));
 app.use(cookieParser());
 app.use(express.json());
 app.use(require("./Controller/signup"));
