@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 dotenv.config({ path: "./.env" });
 const app = express();
 const cookieParser = require("cookie-parser");
+app.use(cors());
 app.use(cookieParser());
 app.use(express.json());
 app.use(require("./Controller/signup"));
@@ -17,7 +18,6 @@ const options = {
   optionSuccessStatus: 200,
   credentials: true
 };
-app.use(cors());
 mongoose.connect("mongodb+srv://manavjoshi:3RvcXXPw8WTFvAxu@cluster0.w5kq0.mongodb.net/?retryWrites=true&w=majority", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
