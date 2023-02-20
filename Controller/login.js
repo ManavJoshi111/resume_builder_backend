@@ -18,7 +18,7 @@ login.post("/login", async (req, res) => {
       const Token = await userLogin.generateAuthToken();
       console.log("Token in login.js is ", Token);
       // store the cookie into users browser and set samesite attrubute to none
-      res.cookie("jwToken", Token, { sameSite: 'none', secure: false });
+      res.cookie("jwToken", Token);
       if (!isMatch) {
         return res
           .status(400)
