@@ -7,7 +7,7 @@ dotenv.config({ path: "./.env" });
 const app = express();
 const cookieParser = require("cookie-parser");
 app.use(cors({
-  origin: "https://resume-builder-frontend.onrender.com",
+  origin: "http://3.109.62.249:3000",
   credentials: true,
 }));
 app.use(cookieParser());
@@ -43,8 +43,7 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static('Frontend/build'));
 }
 
-// Listening to port 3001
+// Listening to port 8000
 app.listen(process.env.PORT || 8000, () => {
-  console.log("dljf : ", process.env.PORT);
   console.log("Server is running on port 8000");
 });
