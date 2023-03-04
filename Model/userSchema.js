@@ -69,7 +69,7 @@ const userSchema = new mongoose.Schema({
     //required: true,
   },
   achievement: {
-    type: String,
+    type: Array,
     //required: true,
   },
   sdate: {
