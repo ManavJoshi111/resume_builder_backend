@@ -36,6 +36,15 @@ const userSchema = new mongoose.Schema({
     type: Array,
     //required: true,
   },
+  certificates: {
+    type: Array,
+  },
+  achievements: {
+    type: Array,
+  },
+  about: {
+    type: String,
+  },
   collegesdate: {
     type: String,
   },
@@ -44,72 +53,24 @@ const userSchema = new mongoose.Schema({
   },
   cname: {
     type: String,
-    //required: true,
+  },
+  cpi: {
+    type: String,
   },
   experience: {
     type: Array,
-    //required: true,
-  },
-  start_date: {
-    type: Date,
-  },
-  end_date: {
-    type: Date,
   },
   projects: {
     type: Array,
-    //required: true,
-  },
-  certificates: {
-    type: Array,
-    //required: true,
-  },
-  about: {
-    type: String,
-    //required: true,
-  },
-  achievement: {
-    type: Array,
-    //required: true,
-  },
-  sdate: {
-    type: String,
-  },
-  edate: {
-    type: String,
-  },
-  jtitle: {
-    type: String,
-  },
-  jdesc: {
-    type: String,
-  },
-  ptitle1: {
-    type: String,
-  },
-  pdesc1: {
-    type: String,
-  },
-  plink1: {
-    type: String,
-  },
-  ptitle2: {
-    type: String,
-  },
-  pdesc2: {
-    type: String,
-  },
-  plink2: {
-    type: String,
   },
   tokens: [
     {
       token: {
         type: String,
-        required: true,
+        //required: true,
       },
     },
-  ],
+  ]
 });
 
 // Hasing technique of the password
