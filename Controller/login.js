@@ -17,8 +17,11 @@ login.post("/login", async (req, res) => {
       const isMatch = await bcrypt.compare(password, userLogin.password);
       const Token = await userLogin.generateAuthToken();
       console.log("Token in login.js is ", Token);
-      // store the cookie into users browser and set samesite attrubute to none
-      res.cookie("jwToken", Token);
+      // store the cookie which will expire after 7days
+      res.cookie("jwToken", Token, {
+        expires: new Date(Date.now() + 25892000000),
+        httpOnly: true,
+      });
       if (!isMatch) {
         return res
           .status(400)

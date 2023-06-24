@@ -10,34 +10,49 @@ router.get("/signup", (req, res) => {
 });
 
 router.post("/signup", async (req, res) => {
-  if (req.body.email == "" || req.body.username == "" || req.body.password == "") {
-    res.status(400).json({ error: "Please fill all the fields" });
+  const { name, username, email, number, password, image } = req.body;
+
+  if (!name || !username || !email || !password) {
+    return res.status(400).json({ error: "Please fill all the fields" });
   }
 
-  User.findOne({ email: req.body.email })
-    .then((user) => {
-      if (user) {
-        return res.json({ error: "Email ID already exists" });
-      }
-      else {
-        const user = new User(req.body);
-        console.log(req.body);
-        user
-          .save()
-          .then(() => {
-            res
-              .status(201)
-              .json({ message: "Account created successfully" });
-          })
-          .catch((err) => {
-            res.status(500).json({ error: err });
-          });
-      }
-    })
-    .catch((err) => {
-      return err;
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    return res.status(400).json({ error: "Invalid email format" });
+  }
+
+  const numberRegex = /^\d{10}$/;
+  if (number && !numberRegex.test(number)) {
+    return res.status(400).json({ error: "Invalid number format" });
+  }
+
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+  if (!passwordRegex.test(password)) {
+    return res.status(400).json({ error: "Invalid password format" });
+  }
+
+  try {
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ error: "Email ID already exists" });
+    }
+
+    const newUser = new User({
+      name,
+      username,
+      email,
+      number,
+      password,
+      image,
     });
+
+    await newUser.save();
+    return res.status(201).json({ message: "Account created successfully" });
+  } catch (err) {
+    return res.status(500).json({ error: err });
+  }
 });
+
 
 router.get("/makecv", authenticate, (req, res) => {
   console.log("Make CV Router from backend");
