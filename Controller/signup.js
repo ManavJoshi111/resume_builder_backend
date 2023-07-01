@@ -10,9 +10,9 @@ router.get("/signup", (req, res) => {
 });
 
 router.post("/signup", async (req, res) => {
-  const { name, username, email, number, password, image } = req.body;
+  const { name, email, number, password, image } = req.body;
 
-  if (!name || !username || !email || !password) {
+  if (!name || !email || !password) {
     return res.status(400).json({ error: "Please fill all the fields" });
   }
 
@@ -34,12 +34,11 @@ router.post("/signup", async (req, res) => {
   try {
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      return res.status(400).json({ error: "Email ID already exists" });
+      return res.status(400).json({ error: "This email id is already associated with some other account" });
     }
 
     const newUser = new User({
       name,
-      username,
       email,
       number,
       password,
