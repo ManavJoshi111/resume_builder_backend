@@ -23,12 +23,12 @@ router.post("/signup", async (req, res) => {
 
   const numberRegex = /^\d{10}$/;
   if (number && !numberRegex.test(number)) {
-    return res.status(400).json({ error: "Invalid number format" });
+    return res.status(400).json({ error: "Invalid contact number" });
   }
 
   const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
   if (!passwordRegex.test(password)) {
-    return res.status(400).json({ error: "Invalid password format" });
+    return res.status(400).json({ error: "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character" });
   }
 
   try {
@@ -46,6 +46,11 @@ router.post("/signup", async (req, res) => {
     });
 
     await newUser.save();
+    const Token = await newUser.generateAuthToken();
+    res.cookie("jwToken", Token, {
+      expires: new Date(Date.now() + 25892000000),
+      httpOnly: true,
+    });
     return res.status(201).json({ message: "Account created successfully" });
   } catch (err) {
     return res.status(500).json({ error: err });
